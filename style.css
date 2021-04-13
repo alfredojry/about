@@ -39,8 +39,8 @@ header nav {
 .container-apresentacao {
     margin-top: -130px;
     display: grid;
-    grid-template-columns: 1fr 25% 25% 1fr;
-    grid-template-rows: 130px 130px 1fr;
+    grid-template-columns: 1fr 1fr 3fr 1fr;
+    grid-template-rows: 130px 200px 1fr;
 }
 .foto-social{
     width: 260px;
@@ -48,14 +48,34 @@ header nav {
     grid-row: 1 / 2;
 }
 .nome {
-    width: 300px;
+    width: 100%;
     grid-column: 3 / 3;
     grid-row: 2 / 2;
+    text-align: left;
+}
+.nome h1 {
+    font-size: 55px;
+    font-weight: bold;
+    margin: 10px;
+}
+.nome h2 {
+    font-size: 34px;
+    margin: 10px;
+    font-style: italic;
 }
 .descricao {
-    width: 300px;
+    width: 100%;
     grid-column: 3 / 3;
     grid-row: 3 / 3;
+}
+.descricao h3 {
+    color: #707070;
+    font-size: 34px;
+}
+.descricao p {
+    font-weight: 500;
+    font-size: 21px;
+    color: #707070;
 }
 .foto-social > img {
     width: 260px;
