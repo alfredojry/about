@@ -157,8 +157,23 @@ header nav {
 .item-formacao {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     margin: 1em;
+    margin-left: 15em;
+}
+#experiencia {
+    background-color: #434343;
+    color: #999999;
+    padding: 2em;
+}
+#experiencia > h1 {
+    font-size: 30px;
+    font-family: 'Segoe UI Regular', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    margin-top: 0px;
+}
+#experiencia .vertical {
+    background-color: white;
 }
 @media screen and (max-width: 900px) {
     .banner {
@@ -199,6 +214,12 @@ header nav {
     }
     .txt-descritivo {
         font-size: 18px;
+    }
+    #experiencia > h1 {
+        font-size: 20px;
+    }
+    .item-formacao {
+        margin-left: 10px;
     }
 }
 @media screen and (max-width: 700px) {
