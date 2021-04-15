@@ -175,6 +175,58 @@ header nav {
 #experiencia .vertical {
     background-color: white;
 }
+#projetos {
+    background-color: #F2F2F2;
+    color: #707070;
+    padding: 2em;
+}
+#projetos > section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+#projetos > h1 {
+    font-size: 30px;
+    font-family: 'Segoe UI Regular', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    margin-top: 0px;
+}
+#projetos > section > article {
+    width: 230px;
+    padding: 30px;
+    background-color: white;
+}
+#projetos > section > article > img {
+    width: 230px;
+    height: 130px;
+}
+#projetos > section > article > h3 {
+    font-size: 21px;
+    margin: 5px;
+}
+#projetos > section > article > p {
+    font-size: 13px;
+}
+#projetos > section > article > nav {
+    margin: 5px;
+    display: flex;
+    justify-content: space-around;
+}
+#projetos > section > article > nav > a {
+    font-size: 12px;
+    cursor: pointer;
+    display: inline-block;
+    background-color: #585858;
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 5px;
+    font-family: 'Segoe UI Bold', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 5px;
+    width: 100px;
+    box-sizing: border-box;
+    text-align: center;
+}
 @media screen and (max-width: 900px) {
     .banner {
         height: 250px;
