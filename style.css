@@ -33,7 +33,7 @@ header {
     display: flex;
     justify-content: space-around;
     position: fixed;
-    width: 100%;
+    width: 100vw;
     top: 0px;
 }
 main {
@@ -64,7 +64,7 @@ header nav {
 .container-apresentacao {
     margin-top: -130px;
     display: grid;
-    grid-template-columns: 1fr 1fr 2fr 1fr;
+    grid-template-columns: 1fr 1fr 3fr 1fr;
     grid-template-rows: 130px 1fr 2fr;
 }
 .foto-social{
@@ -73,7 +73,7 @@ header nav {
     grid-row: 1 / 2;
 }
 .nome {
-    width: 100%;
+    max-width: 75%;
     grid-column: 3 / 3;
     grid-row: 2 / 2;
     text-align: left;
@@ -82,13 +82,13 @@ header nav {
 }
 .nome h1 {
     font-family: 'Segoe UI Bold', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: bold;
     margin: 5px;
 }
 .nome h2 {
     font-family: 'Segoe UI Bold Italic', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 30px;
+    font-size: 24px;
     margin: 5px;
     font-style: italic;
 }
@@ -142,13 +142,13 @@ header nav {
         width: 200px;
     }
     .nome h1 {
-        font-size: 30px;
+        font-size: 23px;
     }
     .nome h2 {
-        font-size: 22px;
+        font-size: 18px;
     }
     .descricao h3 {
-        font-size: 20px;
+        font-size: 18px;
     }
     .descricao p {
         font-size: 16px;
@@ -177,13 +177,13 @@ header nav {
         width: 170px;
     }
     .nome h1 {
-        font-size: 24px;
-    }
-    .nome h2 {
         font-size: 18px;
     }
+    .nome h2 {
+        font-size: 14px;
+    }
     .descricao h3 {
-        font-size: 16px;
+        font-size: 14px;
     }
     .descricao p {
         font-size: 14px;
@@ -203,7 +203,9 @@ header nav {
     }
     .foto-social {
         max-width: fit-content;
-        margin-left: 25%;
+        margin-left: 12%;
+        align-content: center
+;
     }
     .foto-social > img {
         width: 170px;
@@ -218,10 +220,10 @@ header nav {
         width: 170px;
     }
     .nome {
-        margin-left: 15%;
+        margin-left: 10%;
     }
     .nome h1 {
-        font-size: 24px;
+        font-size: 20px;
     }
     .nome h2 {
         font-size: 18px;
