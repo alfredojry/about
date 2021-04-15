@@ -126,6 +126,40 @@ header nav {
     margin-top: -60px;
     width: 260px;
 }
+.vertical {
+    background-color: black;
+    width: 8px;
+    height: 66px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-right: 10px;
+}
+.grupo-text {
+    display: inline-block;
+}
+#formacao {
+    background-color: #DEDEDE;
+    padding: 2em;
+}
+#formacao > h1 {
+    font-size: 30px;
+    font-family: 'Segoe UI Regular', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    margin-top: 0px;
+}
+.txt-pequeno {
+    font-size: 13px;
+}
+.txt-descritivo {
+    font-size: 21px;
+    font-family: 'Segoe UI Bold', Tahoma, Geneva, Verdana, sans-serif;
+}
+.item-formacao {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 1em;
+}
 @media screen and (max-width: 900px) {
     .banner {
         height: 250px;
@@ -156,6 +190,15 @@ header nav {
     .container-apresentacao {
         margin-top: -120px;
         grid-template-columns: 1fr 200px 3fr 1fr;
+    }
+    #formacao > h1 {
+        font-size: 20px;
+    }
+    .txt-pequeno {
+        font-size: 13px;
+    }
+    .txt-descritivo {
+        font-size: 18px;
     }
 }
 @media screen and (max-width: 700px) {
@@ -202,9 +245,8 @@ header nav {
         height: 100px;
     }
     .foto-social {
-        max-width: fit-content;
-        margin-left: 12%;
-        align-content: center
+        width: 150px;
+        align-content: center;
 ;
     }
     .foto-social > img {
@@ -238,6 +280,15 @@ header nav {
         margin-top: -90px;
         display: flex;
         flex-direction: column;
-        justify-items: center;
+        align-items: center;
+    }
+    #formacao > h1 {
+        font-size: 20px;
+    }
+    .txt-pequeno {
+        font-size: 12px;
+    }
+    .txt-descritivo {
+        font-size: 14px;
     }
 }
