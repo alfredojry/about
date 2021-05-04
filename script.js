@@ -1,3 +1,5 @@
+// Validação de formulário *******************************************************************
+
 let form       = document.querySelector('form');
 let inNome     = document.querySelector('input[name=nome]')
 let inEmail    = document.querySelector('input[name=email]')
@@ -83,3 +85,145 @@ function exibirErroMensagem(event) {
 }
 
 inMensagem.addEventListener('input', exibirErroMensagem);
+
+// Consulta de repositórios ************************************************************************
+
+let inicioIntervalo = 0;
+let intervalo = 5;
+let user = 'alfredojry';
+let urlAPI = `https://api.github.com/users/${user}/repos`;
+let btPrev = document.getElementById('bt-nav-left');
+let btNext = document.getElementById('bt-nav-right');
+
+window.addEventListener('DOMContentLoaded', mostrarPrimeirosRepos);
+window.addEventListener('DOMContentLoaded', function () {
+    btNext.addEventListener('click', mostrarSeguintesRepos);
+    btPrev.addEventListener('click', mostrarAnterioresRepos);
+    refreshRepos(dataOffline);
+});
+
+function mostrarPrimeirosRepos() {
+    let divIntervalo = document.querySelector('.controle-repos > div');
+    let posInicio = 0;
+    getData().then(data => {
+        refreshRepos(data.slice(posInicio, posInicio + intervalo));
+        let numRepos  = data.length;
+        divIntervalo.textContent = `${posInicio + 1} - ${intervalo > numRepos ? numRepos : intervalo} de ${numRepos}`;
+        btPrev.disabled = true;
+        if (numRepos > intervalo) btNext.disabled = false;
+    })
+    .catch(function (erro) {
+        refreshRepos(dataError);
+    });
+}
+
+function mostrarSeguintesRepos() {
+    refreshRepos(dataOffline);
+    let divIntervalo = document.querySelector('.controle-repos > div');
+    let posInicio = divIntervalo.textContent ? Number(divIntervalo.textContent.match(/^\d+/g)[0]) - 1 : 0;
+    posInicio += intervalo;
+    getData().then(data => {
+        refreshRepos(data.slice(posInicio, posInicio + intervalo));
+        let numRepos  = data.length;
+        divIntervalo.textContent = `${posInicio + 1} - ${intervalo + posInicio > numRepos ? numRepos : intervalo + posInicio} de ${numRepos}`;
+        btNext.disabled = intervalo + posInicio >= numRepos;
+        btPrev.disabled = posInicio == 0; 
+    })
+    .catch(function (erro) {
+        refreshRepos(dataError);
+    });
+}
+
+function mostrarAnterioresRepos() {
+    refreshRepos(dataOffline);
+    let divIntervalo = document.querySelector('.controle-repos > div');
+    let posInicio = divIntervalo.textContent ? Number(divIntervalo.textContent.match(/^\d+/g)[0]) - 1 : 0;
+    posInicio -= intervalo;
+    getData().then(data => {
+        refreshRepos(data.slice(posInicio, posInicio + intervalo));
+        let numRepos  = data.length;
+        divIntervalo.textContent = `${posInicio + 1} - ${intervalo + posInicio > numRepos ? numRepos : intervalo + posInicio} de ${numRepos}`;
+        btNext.disabled = intervalo + posInicio >= numRepos;
+        btPrev.disabled = posInicio == 0;
+    })
+    .catch(function (erro) {
+        refreshRepos(dataError);
+    });
+}
+
+async function getData() {
+    let response = await fetch(urlAPI);
+    if (!response.ok) {
+        throw new Error(response.status);
+    }
+    let data = await response.json();
+    return data;
+}
+
+function articleRepo(item) {
+    let divTitulo = document.createElement('div');
+    let anchorRepo = document.createElement('a');
+    anchorRepo.textContent = item.name;
+    anchorRepo.href = item.html_url;
+    anchorRepo.target = '_blank';
+    anchorRepo.rel = 'noopener noreferrer';
+    divTitulo.appendChild(anchorRepo);
+    divTitulo.classList.add('titulo-repo');
+    let divLinguagem = document.createElement('div');
+    divLinguagem.textContent = item.language ? item.language : 'texto';
+    divLinguagem.classList.add('language-repo');
+    let divDescricao = document.createElement('div');
+    divDescricao.textContent = item.description ? item.description : `Projeto legal e bacano ${item.language ? 'em ' + item.language : ''}`;
+    divDescricao.classList.add('descricao-repo')
+    let divGHPage = document.createElement('div');
+    divGHPage.classList.add('demo-repo');
+    if (item.has_pages) {
+        let urlGHPage = `https://alfredojry.github.io/${item.name}`;
+        let anchor = document.createElement('a');
+        anchor.href = urlGHPage;
+        anchor.target = '_blank';
+        anchor.rel = 'noopener noreferrer';
+        anchor.textContent = 'GH-Page';
+        divGHPage.appendChild(anchor);
+    }
+    let article = document.createElement('article');
+    article.append(divTitulo, divLinguagem, divDescricao, divGHPage);
+    return article;
+}
+
+function refreshRepos(arr) {
+    let divArticles = document.querySelector('.articles-repos');
+    divArticles.innerHTML = '';
+    for (let item of arr) {
+        let article = articleRepo(item);
+        article.style.backgroundColor = randomColors();
+        divArticles.appendChild(article);
+    }
+}
+
+function randomColors() {
+    let colors = ['#e6fcb1', '#faebdc', '#e6fffc', '#ebe6ff', 
+    '#fee6ff', '#ffe6ed', '#edffbd', '#deffed', '#dee1ff', '#f4deff'];
+    let randomNum = Math.floor(colors.length * Math.random());
+    return colors[randomNum];
+}
+
+let itemOffline = {
+    name: 'Carregando nome do repositório...',
+    html_url: '#',
+    language: null,
+    description: 'Carregando descrição...',
+    has_pages: false,
+};
+
+let dataOffline = Array.from({ length: intervalo }, () => itemOffline);
+
+let itemError = {
+    name: 'Error al cargar informações do repositório...',
+    html_url: '#',
+    language: null,
+    description: 'offline',
+    has_pages: false,
+};
+
+let dataError = Array.from({ length: intervalo }, () => itemError);
