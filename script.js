@@ -99,10 +99,11 @@ window.addEventListener('DOMContentLoaded', mostrarPrimeirosRepos);
 window.addEventListener('DOMContentLoaded', function () {
     btNext.addEventListener('click', mostrarSeguintesRepos);
     btPrev.addEventListener('click', mostrarAnterioresRepos);
-    refreshRepos(dataOffline);
 });
 
 function mostrarPrimeirosRepos() {
+    refreshRepos(dataOffline);
+    animationArticle();
     let divIntervalo = document.querySelector('.controle-repos > div');
     let posInicio = 0;
     getData().then(data => {
@@ -119,6 +120,7 @@ function mostrarPrimeirosRepos() {
 
 function mostrarSeguintesRepos() {
     refreshRepos(dataOffline);
+    animationArticle();
     let divIntervalo = document.querySelector('.controle-repos > div');
     let posInicio = divIntervalo.textContent ? Number(divIntervalo.textContent.match(/^\d+/g)[0]) - 1 : 0;
     posInicio += intervalo;
@@ -136,6 +138,7 @@ function mostrarSeguintesRepos() {
 
 function mostrarAnterioresRepos() {
     refreshRepos(dataOffline);
+    animationArticle();
     let divIntervalo = document.querySelector('.controle-repos > div');
     let posInicio = divIntervalo.textContent ? Number(divIntervalo.textContent.match(/^\d+/g)[0]) - 1 : 0;
     posInicio -= intervalo;
@@ -227,3 +230,16 @@ let itemError = {
 };
 
 let dataError = Array.from({ length: intervalo }, () => itemError);
+
+function animationArticle() {
+    let articles = document.querySelectorAll('.articles-repos>article');
+    let colors = ['white', '#adadad', 'gray', '#d4d4d4', '#f0f0f0'];
+    let keyFrames = colors.map(c => ({'backgroundColor': c}));
+    console.log(keyFrames)
+    for (let art of articles) {
+        art.animate( keyFrames, {
+            duration: 1500,
+            iterations: 'Infinity',
+        });
+    }
+}
