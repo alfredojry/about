@@ -22,8 +22,11 @@ function formCerta() {
 }
 
 function nomeCerto() {
-    let nome = inNome.value;
-    return nome.length > 4;
+    let nome = inNome.value
+        .replace(/\s{2,}/, ' ')
+        .replace(/^\s/, '');
+    inNome.value = nome;
+    return nome.replace(/\s$/, '').length > 4;
 }
 
 function exibirErroNome(event) {
@@ -55,7 +58,10 @@ function exibirErroEmail(event) {
 inEmail.addEventListener('input', exibirErroEmail);
 
 function assuntoCerto() {
-    let assunto = inAssunto.value;
+    let assunto = inAssunto.value
+    .replace(/\s{2,}/, ' ')
+    .replace(/^\s/, '');
+    inAssunto.value = assunto;
     return assunto.length > 2;
 }
 
@@ -71,7 +77,10 @@ function exibirErroAssunto(event) {
 inAssunto.addEventListener('input', exibirErroAssunto);
 
 function mensagemCerto() {
-    let mensagem = inMensagem.value;
+    let mensagem = inMensagem.value
+    .replace(/\s{2,}/, ' ')
+    .replace(/^\s/, '');
+    inMensagem.value = mensagem;
     return mensagem.length > 9;
 }
 
@@ -91,7 +100,7 @@ inMensagem.addEventListener('input', exibirErroMensagem);
 let inicioIntervalo = 0;
 let intervalo = 5;
 let user = 'alfredojry';
-let urlAPI = `https://api.github.com/users/${user}/repos`;
+let urlAPI = `https://api.github.com/users/${user}/repos?per_page=100`;
 let btPrev = document.getElementById('bt-nav-left');
 let btNext = document.getElementById('bt-nav-right');
 
@@ -235,7 +244,6 @@ function animationArticle() {
     let articles = document.querySelectorAll('.articles-repos>article');
     let colors = ['white', '#adadad', 'gray', '#d4d4d4', '#f0f0f0'];
     let keyFrames = colors.map(c => ({'backgroundColor': c}));
-    console.log(keyFrames)
     for (let art of articles) {
         art.animate( keyFrames, {
             duration: 1500,
